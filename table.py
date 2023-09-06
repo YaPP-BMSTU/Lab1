@@ -20,8 +20,8 @@ class Table:
             for key, val in row.items():
                 tmp = size_dict[key]
                 size_dict[key] = max(tmp, len(val))
+
         space = len(data) // 10
-        print(space)
         result += f'{space * " "}id|'
         for val in header:
             space = size_dict[val] - len(val) + 3
@@ -36,4 +36,5 @@ class Table:
                 result += f'{space * " "}{val}|'
             result += "\n"
             i += 1
+
         return result

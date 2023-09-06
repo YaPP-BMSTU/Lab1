@@ -23,3 +23,4 @@ if __name__ == '__main__':
 
         metric = Metrics(data, region, col)
         print(metric)
+        print(f'min:{metric.min()}, max:{metric.max()}, median:{metric.median()}, average:{metric.average()}')
