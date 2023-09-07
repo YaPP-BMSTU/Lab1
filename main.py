@@ -1,10 +1,11 @@
 from csv import *
 from metrics import *
 
-if __name__ == '__main__':
+
+def main():
     filename = str(input("Enter file path: "))
 
-    csv = CSVParser(filename)
+    csv = CSV(filename)
     data = csv.parse_csv()
 
     if len(data) == 0:
@@ -24,3 +25,7 @@ if __name__ == '__main__':
         metric = Metrics(data, region, col)
         print(metric)
         print(f'min:{metric.min()}, max:{metric.max()}, median:{metric.median()}, average:{metric.average()}')
+
+
+if __name__ == '__main__':
+    main()

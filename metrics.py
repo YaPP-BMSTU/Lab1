@@ -1,14 +1,14 @@
 from table import *
 
 class Metrics(Table):
-    def __init__(self, data, filter, col, filter_name="region"):
+    def __init__(self, data, filter_val, col, filter_name="region"):
         super().__init__(data)
-        self.filter = filter
+        self.filter = filter_val
         self.col = int(col)
         self.filter_name = filter_name
         data = []
         for row in self.data:
-            if row[self.filter_name] == filter:
+            if row[self.filter_name] == filter_val:
                 data.append(row)
         self.data = data
         self.metric_data = self.get_metric_data()
