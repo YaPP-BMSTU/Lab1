@@ -3,13 +3,19 @@ from metrics import *
 
 
 def main():
-    filename = str(input("Enter file path: "))
+    while True:
+        filename = str(input("Enter file path: "))
+        try:
+            csv = Csv(filename)
+            data = csv.parse_csv()
+            if len(data) == 0:
+                raise MyException('Error, file is empty')
+            break
+        except MyException as e:
+            print(e.message)
+            continue
 
-    csv = CSV(filename)
-    data = csv.parse_csv()
-
-    if len(data) == 0:
-        exit(-1)
+    table = Table(data)
 
     while True:
         region = str(input("Enter region: "))
@@ -19,12 +25,15 @@ def main():
             print("Error, input field is empty")
             continue
         if not col.isdigit():
-            print("Error, column must be a number")
+            print("Error, column number is invalid")
             continue
-
-        metric = Metrics(data, region, col)
-        print(metric)
-        print(f'min:{metric.min()}, max:{metric.max()}, median:{metric.median()}, average:{metric.average()}')
+        try:
+            metric = Metrics(table, region, col)
+            print(metric)
+            print(f'min:{metric.min()}, max:{metric.max()}, median:{metric.median()}, average:{metric.average()}')
+            metric.percentile_table()
+        except MyException as e:
+            print(e.message)
 
 
 if __name__ == '__main__':

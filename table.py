@@ -1,3 +1,5 @@
+from exception import MyException
+
 class Table:
     def __init__(self, data):
         self.data = data
@@ -7,8 +9,8 @@ class Table:
         keys = self.data[0].keys()
         return list(keys)
 
-    def __str__(self, data=None):
-        data = self.data if data is None else data
+    def __str__(self):
+        data = self.data
         result = ""
         header = self.header
         size_dict = {}
